@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090812">
+<title>GameHouse | Gaming Gear & PC Parts</title>
+<style>
+:root{--bg:#090812;--panel:#141222;--panel2:#1c1830;--gold:#f4c15d;--purple:#9c70ff;--text:#f7f4ff;--muted:#aaa5bd;--border:#302844}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#201239 0,#090812 48%);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+header{position:sticky;top:0;z-index:5;background:#0b0914ed;backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav{max-width:1150px;margin:auto;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-size:25px;font-weight:900;letter-spacing:-1px}
+.brand span{color:var(--gold)}
+.tagline{color:var(--muted);font-size:12px;margin-top:4px}
+nav{display:flex;gap:7px;flex-wrap:wrap}
+nav button,.ghost{background:transparent;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
+nav button:hover,.ghost:hover{border-color:var(--gold);color:var(--gold)}
+main{max-width:1150px;margin:auto;padding:24px 20px 50px}
+.hero{border:1px solid #55402d;border-radius:22px;padding:30px;background:linear-gradient(115deg,#21132f,#171024 58%,#392449);position:relative;overflow:hidden}
+.hero:after{content:"🎮";position:absolute;right:25px;bottom:-30px;font-size:140px;opacity:.12}
+.eyebrow{color:var(--gold);font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase}
+h1{font-size:clamp(30px,6vw,48px);line-height:1.05;margin:13px 0}
+.hero p{color:#d1c9e2;max-width:540px;line-height:1.6}
+.gold{background:linear-gradient(135deg,#ffe09a,#e6a936);border:0;color:#211606;font-weight:800;padding:12px 17px;border-radius:11px}
+.searchbar{display:flex;gap:8px;margin:20px 0}
+.searchbar input{flex:1;min-width:0}
+input,select{background:#100e1b;color:var(--text);border:1px solid var(--border);border-radius:11px;padding:13px;outline:none;width:100%}
+input:focus,select:focus{border-color:var(--purple)}
+.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:28px 0 14px;flex-wrap:wrap}
+h2{font-size:21px;margin:0}
+.muted{color:var(--muted);font-size:13px}
+.categories{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.cat{background:var(--panel);border:1px solid var(--border);color:var(--text);border-radius:14px;padding:16px 7px;text-align:center}
+.cat b{display:block;font-size:24px;margin-bottom:9px}
+.cat.active,.cat:hover{border-color:var(--gold);background:#292039}
+.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{background:linear-gradient(150deg,#191629,#100e19);border:1px solid var(--border);border-radius:16px;padding:16px;min-width:0}
+.card:hover{border-color:#6c508b;transform:translateY(-2px)}
+.producticon{height:105px;display:grid;place-items:center;font-size:60px;background:radial-gradient(circle,#38254e,#171321 70%);border-radius:12px;margin-bottom:13px}
+.pcat{font-size:11px;color:var(--purple);text-transform:uppercase;font-weight:bold;letter-spacing:1px}
+.card h3{font-size:16px;line-height:1.4;min-height:44px;margin:8px 0}
+.spec{font-size:12px;color:var(--muted);line-height:1.7;min-height:42px}
+.price{font-size:20px;color:var(--gold);font-weight:800;margin:13px 0 4px}
+.sample{font-size:10px;color:#d7a6ff;background:#281c38;border-radius:6px;padding:5px 7px;display:inline-block}
+.actions{display:flex;gap:7px;margin-top:13px}
+.actions button{flex:1;padding:10px 6px;border-radius:9px;border:1px solid var(--border);background:#211a30;color:var(--text);font-size:12px}
+.actions button:hover{border-color:var(--gold)}
+.actions .fav{flex:0 0 42px;font-size:17px}
+.comparebox{margin-top:26px;padding:20px;background:var(--panel);border:1px solid var(--border);border-radius:16px}
+.comparebox p{color:var(--muted);font-size:13px;line-height:1.6}
+.comparecontrols{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.comparecontrols select{flex:1;min-width:180px}
+.comparecontrols button{white-space:nowrap}
+.tablewrap{overflow-x:auto;margin-top:15px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{text-align:left;padding:12px;border-bottom:1px solid var(--border);vertical-align:top}
+th{color:var(--gold)}
+.diff{background:#2c2139}
+.empty{grid-column:1/-1;padding:30px;text-align:center;color:var(--muted);border:1px dashed var(--border);border-radius:14px}
+footer{border-top:1px solid var(--border);padding:24px 20px;text-align:center;color:var(--muted);font-size:12px;line-height:1.8}
+.notice{font-size:12px;color:#f3d59c;margin-top:12px}
+.hidden{display:none!important}
+@media(max-width:700px){
+ .nav{padding:13px 15px}main{padding:18px 14px 35px}
+ .categories{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .card{padding:11px}.producticon{height:85px;font-size:48px}
+ .card h3{font-size:14px}.price{font-size:17px}
+ .hero{padding:23px 18px}.hero:after{font-size:90px;right:8px}
+ nav button{padding:8px;font-size:12px}
+}
+@media(max-width:390px){.products{grid-template-columns:1fr}.producticon{height:110px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="nav">
+  <div>
+   <div class="brand">🎮 GAME<span>HOUSE</span></div>
+   <div class="tagline">Gaming Gear & PC Parts</div>
+  </div>
+  <nav>
+   <button onclick="showAll()">Ana Sayfa</button>
+   <button onclick="scrollToProducts()">Ürünler</button>
+   <button onclick="scrollToCompare()">Karşılaştır</button>
+   <button onclick="showFavorites()">♥ Favoriler <span id="favCount">0</span></button>
+  </nav>
+ </div>
+</header>
+<main>
+ <section class="hero">
+  <div class="eyebrow">Oyuncular için yeni nesil alışveriş</div>
+  <h1>Hayalindeki sistemi<br>birlikte kuralım.</h1>
+  <p>Donanımları keşfet, teknik özellikleri karşılaştır ve sana en uygun sistemi planla.</p>
+  <button class="gold" onclick="scrollToProducts()">Ürünleri keşfet →</button>
+  <div class="notice">Demo sürümüdür: listelenen fiyatlar örnektir, canlı mağaza fiyatı değildir.</div>
+ </section>
+
+ <div class="searchbar">
+  <input id="search" type="search" placeholder="Ürün, marka veya model ara..." oninput="render()">
+  <button class="gold" onclick="render()">Ara</button>
+ </div>
+
+ <div class="sectionhead">
+  <h2>Kategoriler</h2><span class="muted">İhtiyacına göre keşfet</span>
+ </div>
+ <div class="categories" id="categories"></div>
+
+ <div class="sectionhead" id="productHeading">
+  <h2 id="productTitle">Öne Çıkan Ürünler</h2>
+  <span class="muted" id="resultCount"></span>
+ </div>
+ <div class="products" id="products"></div>
+
+ <section class="comparebox" id="compare">
+  <h2>⚖️ Ürünleri karşılaştır</h2>
+  <p>İki ürün seç. “Sadece farklı özellikleri göster” seçeneği, aynı olan özellikleri gizler.</p>
+  <div class="comparecontrols">
+   <select id="productA" aria-label="Birinci ürün"></select>
+   <select id="productB" aria-label="İkinci ürün"></select>
+   <button class="gold" onclick="compareProducts()">Karşılaştır</button>
+  </div>
+  <label style="display:flex;align-items:center;gap:9px;margin-top:14px;font-size:13px">
+   <input type="checkbox" id="diffOnly" checked style="width:auto"> Sadece farklı özellikleri göster
+  </label>
+  <div id="compareResult" class="tablewrap"></div>
+ </section>
+</main>
+<footer>
+ <b>GAMEHOUSE</b> · Gaming Gear & PC Parts<br>
+ Bu, ücretsiz prototipin ilk sürümüdür. Ürün fiyatları örnek veridir.<br>
+ © 2026 GameHouse
+</footer>
+
+<script>
+const productsData = [
+ {id:1,name:"AMD Ryzen 5 7600",cat:"İşlemci",icon:"🧠",price:6500,brand:"AMD",socket:"AM5",cores:"6 çekirdek",speed:"3.8 GHz",memory:"DDR5",power:"65 W"},
+ {id:2,name:"AMD Ryzen 7 7700",cat:"İşlemci",icon:"🧠",price:8900,brand:"AMD",socket:"AM5",cores:"8 çekirdek",speed:"3.8 GHz",memory:"DDR5",power:"65 W"},
+ {id:3,name:"NVIDIA RTX 4060",cat:"Ekran Kartı",icon:"🎮",price:12500,brand:"NVIDIA",vram:"8 GB",memory:"GDDR6",power:"115 W",ports:"HDMI / DisplayPort"},
+ {id:4,name:"NVIDIA RTX 4070",cat:"Ekran Kartı",icon:"🎮",price:23500,brand:"NVIDIA",vram:"12 GB",memory:"GDDR6X",power:"200 W",ports:"HDMI / DisplayPort"},
+ {id:5,name:"B650 Gaming WiFi",cat:"Anakart",icon:"🧩",price:6200,brand:"Çeşitli",socket:"AM5",memory:"DDR5",size:"ATX",wifi:"Var"},
+ {id:6,name:"B550 Gaming",cat:"Anakart",icon:"🧩",price:3900,brand:"Çeşitli",socket:"AM4",memory:"DDR4",size:"ATX",wifi:"Yok"},
+ {id:7,name:"DDR5 32 GB 6000 MHz",cat:"RAM",icon:"📟",price:3200,brand:"Çeşitli",capacity:"32 GB",memory:"DDR5",speed:"6000 MHz"},
+ {id:8,name:"DDR4 32 GB 3200 MHz",cat:"RAM",icon:"📟",price:2100,brand:"Çeşitli",capacity:"32 GB",memory:"DDR4",speed:"3200 MHz"},
+ {id:9,name:"1 TB NVMe SSD",cat:"Depolama",icon:"💾",price:2400,brand:"Çeşitli",capacity:"1 TB",type:"NVMe SSD"},
+ {id:10,name:"27 inç 165 Hz Monitör",cat:"Monitör",icon:"🖥️",price:6200,brand:"Çeşitli",size:"27 inç",refresh:"165 Hz",resolution:"2560 × 1440"},
+ {id:11,name:"Mekanik RGB Klavye",cat:"Aksesuar",icon:"⌨️",price:1800,brand:"Çeşitli",type:"Mekanik",lighting:"RGB"},
+ {id:12,name:"Oyuncu Kulaklığı",cat:"Aksesuar",icon:"🎧",price:1500,brand:"Çeşitli",type:"Kablolu",microphone:"Var"}
+];
+const categoryList = [
+ {name:"Tümü",icon:"✨"},{name:"İşlemci",icon:"🧠"},
+ {name:"Ekran Kartı",icon:"🎮"},{name:"Anakart",icon:"🧩"},
+ {name:"RAM",icon:"📟"},{name:"Depolama",icon:"💾"},
+ {name:"Monitör",icon:"🖥️"},{name:"Aksesuar",icon:"🎧"}
+];
+let activeCategory="Tümü";
+let favorites=JSON.parse(localStorage.getItem("gh-favorites")||"[]");
+let favoritesMode=false;
+
+function money(n){return new Intl.NumberFormat("tr-TR").format(n)+" TL"}
+function categories(){
+ document.getElementById("categories").innerHTML=categoryList.map(c=>
+ `<button class="cat ${activeCategory===c.name?"active":""}" onclick="chooseCategory('${c.name}')"><b>${c.icon}</b>${c.name}</button>`
+ ).join("");
+}
+function chooseCategory(c){activeCategory=c;favoritesMode=false;categories();render();document.getElementById("productHeading").scrollIntoView({behavior:"smooth",block:"start"})}
+function showAll(){activeCategory="Tümü";favoritesMode=false;categories();render();window.scrollTo({top:0,behavior:"smooth"})}
+function showFavorites(){favoritesMode=true;activeCategory="Tümü";categories();render();document.getElementById("productHeading").scrollIntoView({behavior:"smooth"})}
+function scrollToProducts(){document.getElementById("productHeading").scrollIntoView({behavior:"smooth"})}
+function scrollToCompare(){document.getElementById("compare").scrollIntoView({behavior:"smooth"})}
+function toggleFavorite(id){
+ favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];
+ localStorage.setItem("gh-favorites",JSON.stringify(favorites));
+ render();
+}
+function render(){
+ const q=document.getElementById("search").value.toLocaleLowerCase("tr-TR").trim();
+ let list=productsData.filter(p=>
+ (activeCategory==="Tümü"||p.cat===activeCategory)&&
+ (p.name+" "+p.cat+" "+p.brand).toLocaleLowerCase("tr-TR").includes(q)&&
+ (!favoritesMode||favorites.includes(p.id))
+ );
+ document.getElementById("productTitle").textContent=favoritesMode?"Favorilerim":activeCategory==="Tümü"?"Öne Çıkan Ürünler":activeCategory;
+ document.getElementById("resultCount").textContent=list.length+" ürün";
+ document.getElementById("favCount").textContent=favorites.length;
+ document.getElementById("products").innerHTML=list.length?list.map(p=>`
+ <article class="card">
+  <div class="producticon">${p.icon}</div>
+  <div class="pcat">${p.cat}</div>
+  <h3>${p.name}</h3>
+  <div class="spec">${shortSpecs(p)}</div>
+  <div class="price">${money(p.price)}</div>
+  <span class="sample">ÖRNEK FİYAT</span>
+  <div class="actions">
+   <button onclick="pickForCompare(${p.id})">⚖️ Karşılaştır</button>
+   <button class="fav" aria-label="Favoriye ekle" onclick="toggleFavorite(${p.id})">${favorites.includes(p.id)?"♥":"♡"}</button>
+  </div>
+ </article>`).join(""):`<div class="empty">Burada ürün bulunamadı.</div>`;
+}
+function shortSpecs(p){
+ const keys=["cores","speed","vram","capacity","memory","socket","refresh","resolution","type"];
+ return keys.filter(k=>p[k]).slice(0,3).map(k=>label(k)+": "+p[k]).join("<br>")||"Teknik bilgiler yakında eklenecek";
+}
+function label(k){
+ return ({cores:"Çekirdek",speed:"Hız",vram:"VRAM",capacity:"Kapasite",memory:"Bellek",socket:"Soket",refresh:"Yenileme",resolution:"Çözünürlük",type:"Tür",power:"Güç",brand:"Marka",ports:"Bağlantı",size:"Boyut",wifi:"Wi-Fi",lighting:"Aydınlatma",microphone:"Mikrofon"})[k]||k;
+}
+function setupCompare(){
+ const opts=productsData.map(p=>`<option value="${p.id}">${p.name}</option>`).join("");
+ document.getElementById("productA").innerHTML=opts;
+ document.getElementById("productB").innerHTML=opts;
+ document.getElementById("productB").selectedIndex=1;
+}
+function pickForCompare(id){
+ const a=document.getElementById("productA"),b=document.getElementById("productB");
+ if(Number(a.value)===id)b.value=String(id);
+ else if(Number(b.value)===id)a.value=String(id);
+ else a.value=String(id);
+ scrollToCompare();
+}
+function compareProducts(){
+ const a=productsData.find(p=>p.id===Number(document.getElementById("productA").value));
+ const b=productsData.find(p=>p.id===Number(document.getElementById("productB").value));
+ if(a.id===b.id){document.getElementById("compareResult").innerHTML="<p>Karşılaştırmak için iki farklı ürün seçmelisin.</p>";return}
+ const keys=[...new Set([...Object.keys(a),...Object.keys(b)])].filter(k=>!["id","name","cat","icon","price"].includes(k));
+ let rows=keys.map(k=>({k,av:a[k]??"Belirtilmemiş",bv:b[k]??"Belirtilmemiş"}));
+ if(!document.getElementById("diffOnly").checked)rows.unshift({k:"price",av:money(a.price),bv:money(b.price)});
+ else rows=rows.filter(r=>r.av!==r.bv);
+ if(!rows.length){document.getElementById("compareResult").innerHTML="<p>Seçilen ürünlerde farklı teknik özellik bulunamadı.</p>";return}
+ document.getElementById("compareResult").innerHTML=`
+ <table><thead><tr><th>Özellik</th><th>${a.name}</th><th>${b.name}</th></tr></thead>
+ <tbody>${rows.map(r=>`<tr class="diff"><td>${label(r.k)}</td><td>${r.av}</td><td>${r.bv}</td></tr>`).join("")}</tbody></table>
+ <p class="muted">Not: Bu karşılaştırma örnek ürün verilerine dayanır.</p>`;
+}
+document.getElementById("diffOnly").addEventListener("change",compareProducts);
+categories();setupCompare();render();compareProducts();
+</script>
+</body>
+</html>
